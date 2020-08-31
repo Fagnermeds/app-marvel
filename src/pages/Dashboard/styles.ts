@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;  
+  height: 100vh;
 `;
 
 export const Header = styled.header`
@@ -20,6 +20,14 @@ export const Main = styled.main`
 
   margin: 36px auto 0;
   padding: 34px 36px;
+`;
+
+export const CardsContainer = styled.div`
+  margin-top: 30px;
+  
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 30px;
 `;
 
 export const Title = styled.h1`

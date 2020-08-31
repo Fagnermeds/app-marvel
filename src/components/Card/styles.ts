@@ -6,7 +6,6 @@ export const Container = styled.div`
   border: 1px solid #d8dde6;
   border-bottom: 2px solid #ed1d24;
   border-radius: 8px;
-  margin-top: 30px;
 
   display: flex;
   flex-direction: column;
@@ -18,7 +17,6 @@ export const Avatar = styled.img`
   width: 56px;
   height: 56px;
   border-radius: 50%;
-
 `;
 
 export const HeroName = styled.strong`

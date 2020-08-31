@@ -8,19 +8,26 @@ import { Container,
 } from './styles';
 
 interface CardProps {
-  avatar: string;
-  heroName: string;
-  actorName: string;
-  description: string;
+  heroesData: {
+    id: string;
+    name: string;
+    thumbnail: {
+      extension: string;
+      path: string;
+    }
+    description: string;
+  }
 }
 
-const Card: React.FC = () => {
+const Card: React.FC<CardProps> = ({ heroesData }) => {
+  const imgUrl = `${heroesData.thumbnail.path}/standard_medium.${heroesData.thumbnail.extension}`;  
+  
   return (
     <Container>
-      <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSlDHczOxqK_NdG2Eq43fpH89ugAwGW7F8uRQ&usqp=CAU" alt="Avatar" />
-      <HeroName>Spider Man</HeroName>
+      <Avatar src={imgUrl} alt="Avatar" />
+      <HeroName>{heroesData.name}</HeroName>
       <ActorName>Peter Parker</ActorName>
-      <Description>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</Description>
+      <Description>{heroesData.description}</Description>
     </Container>
   );
 }
