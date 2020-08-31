@@ -60,32 +60,6 @@ export const CardsContainer = styled.div`
   grid-gap: 30px;
 `;
 
-export const Pagination = styled.div`
-  width: 100%;
-  max-width:  148px;
-  margin: 48px auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const LeftButton = styled.button`
-  background-color: transparent;
-  width: 22px;
-  height: 40px;
-  border-radius: 4px;
-  border: 1px solid #c2cbd2;
-
-`;
-
-export const RightButton = styled.button`
-  background-color: transparent;
-  width: 22px;
-  height: 40px;
-  border-radius: 4px;
-  border: 1px solid #c2cbd2;
-`;
-
 export const Footer = styled.footer`
   margin-top: 36px;
   height: 222px;

@@ -4,8 +4,8 @@ import api from '../../services/api';
 import Input from '../../components/Input';
 import filterImg from '../../assets/filter.svg';
 import arrowDown from '../../assets/arrow-down-copy-7.svg';
-import arrowLeft from '../../assets/arrow-left.svg';
-import arrowRight from '../../assets/arrow-right.svg';
+import apiConfig from '../../config/apiConfig';
+import Pagination from '../../components/Pagination';
 
 import { 
   Container, 
@@ -14,9 +14,6 @@ import {
   Title,
   SearchForm,
   CardsContainer,
-  Pagination,
-  LeftButton,
-  RightButton, 
   Footer 
 } from './styles';
 import Card from '../../components/Card';
@@ -32,25 +29,29 @@ interface Heroes {
 }
 
 const Dashboard: React.FC = () => {
-  const timestamp = 1598837521220;
-  const apiKey = 'e176f4aba17a0471a4143ccae4e2aae0';
-  const hash = '012f1f41833a46442b234fe9eceffca3';
-
+  
   const [heroes, setHeroes] = useState<Heroes[]>([]);
+  const [totalHeroes, setTotalHeroes] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [heroesPerPage] = useState(12)
   const [name, setName] = useState('');
+
+  const { timestamp, apiKey, hash } = apiConfig;
 
   useEffect(() => {
     const loadHeroes = async () => {
       const response = 
-        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&limit=9 `);
+        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&limit=15 `);
       
       const { data: { results } } = response.data;
+      const { data: { total } } = response.data;
 
+      setTotalHeroes(total);
       setHeroes(results);
     }
   
     loadHeroes();
-  }, []);
+  }, [apiKey, hash, timestamp]);
 
   const handleSearch = useCallback(async () => {
     const response = 
@@ -59,7 +60,15 @@ const Dashboard: React.FC = () => {
     const { data: { results } } = response.data;
 
     setHeroes(results);
-  }, [name]);
+  }, [apiKey, hash, name, timestamp]);
+
+  const paginate = useCallback((pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  }, []);
+
+  const indexOfLastHero = currentPage * heroesPerPage;
+  const indexOfFirstHero = indexOfLastHero - heroesPerPage;
+  const currentHeroes = heroes.slice(indexOfFirstHero, indexOfLastHero);
 
   return (
     <Container>
@@ -81,17 +90,14 @@ const Dashboard: React.FC = () => {
         </SearchForm>
 
         <CardsContainer>
-          {heroes.map(heroe => <Card key={heroe.id} heroesData={heroe} />)}
+          {currentHeroes.map(heroe => <Card key={heroe.id} heroesData={heroe} />)}
         </CardsContainer>
 
-        <Pagination>
-          <LeftButton>
-            <img src={arrowLeft} alt="Previous" />
-          </LeftButton>
-          <RightButton>
-            <img src={arrowRight} alt="Next" />
-          </RightButton>
-        </Pagination>
+        <Pagination 
+          heroesPerPage={heroesPerPage} 
+          totalHeroes={totalHeroes}
+          paginate={paginate} 
+        />
       </Main>
 
       <Footer>
