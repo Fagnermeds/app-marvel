@@ -8,15 +8,16 @@ interface PaginationProps {
   heroesPerPage: number;
   totalHeroes: number;
   paginate: (pageNumber: number) => void;
+  currentPage: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, paginate }) => {
+const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, paginate, currentPage }) => {
   const totalPages = Math.ceil(totalHeroes / heroesPerPage);
   const [page, setPage] = useState(1);
 
-  // for (let index = 1; index < totalPages; index++) {
-  //   pageNumbers.push(1); 
-  // }
+  console.log({
+    page,
+  })
 
   const next = useCallback(() => {
     if (page === totalPages) {
@@ -25,7 +26,7 @@ const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, pag
     
     setPage(page + 1);
 
-    paginate(page);
+    paginate(page + 1);
   }, [page, paginate, totalPages]);
 
   const previous = useCallback(() => {
@@ -35,7 +36,7 @@ const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, pag
 
     setPage(page - 1);
     
-    paginate(page);
+    paginate(page - 1);
   }, [page, paginate]);
 
   return (
@@ -46,7 +47,7 @@ const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, pag
       <Page>
         <span>{page}</span>
       </Page>
-        <span>de {totalPages}</span>
+      <span>de {totalPages}</span>
       <RightButton onClick={next}>
         <img src={arrowRight} alt="Next" />
       </RightButton>

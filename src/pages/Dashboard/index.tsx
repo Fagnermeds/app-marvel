@@ -96,7 +96,8 @@ const Dashboard: React.FC = () => {
         <Pagination 
           heroesPerPage={heroesPerPage} 
           totalHeroes={totalHeroes}
-          paginate={paginate} 
+          paginate={paginate}
+          currentPage={currentPage} 
         />
       </Main>
 

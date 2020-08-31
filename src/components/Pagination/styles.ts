@@ -7,6 +7,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  > span {
+    size: 14px;
+    color: #c2cbd2;
+  }
 `;
 
 export const LeftButton = styled.button`
@@ -25,7 +30,7 @@ export const Page = styled.div`
   border-bottom: 1px solid #9b9b9b;
   size: 14px;
   color: #4a4a4a;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
