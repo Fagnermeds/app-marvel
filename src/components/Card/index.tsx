@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({ heroesData }) => {
       <Avatar src={imgUrl} alt="Avatar" />
       <HeroName>{heroesData.name}</HeroName>
       <ActorName>Peter Parker</ActorName>
-      <Description>{heroesData.description}</Description>
+      <Description>{heroesData.description ? heroesData.description : 'No description.'}</Description>
     </Container>
   );
 }

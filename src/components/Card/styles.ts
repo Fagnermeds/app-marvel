@@ -41,4 +41,7 @@ export const Description = styled.p`
   size: 14px;
   color: #4a4a4a;
   line-height: 23px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

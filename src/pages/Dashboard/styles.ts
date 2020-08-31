@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
 `;
 
 export const Header = styled.header`
@@ -22,19 +21,12 @@ export const Main = styled.main`
   padding: 34px 36px;
 `;
 
-export const CardsContainer = styled.div`
-  margin-top: 30px;
-  
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  grid-gap: 30px;
-`;
 
 export const Title = styled.h1`
   color: #ed1d24;
 `;
 
-export const Search = styled.div`
+export const SearchForm = styled.div`
   margin-top: 16px;
 
   display: flex;
@@ -44,9 +36,79 @@ export const Search = styled.div`
     width: 24px;
     height: 24px;
     margin-left: 38px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  span {
+    size: 14px;
+    color: #4a4a4a;
+    margin-left: 10px;
   }
 `;
 
-export const Input = styled.div``
+export const CardsContainer = styled.div`
+  margin-top: 30px;
+  
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(3,1fr);
+  grid-gap: 30px;
+`;
 
-export const Footer = styled.footer``;
+export const Pagination = styled.div`
+  width: 100%;
+  max-width:  148px;
+  margin: 48px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const LeftButton = styled.button`
+  background-color: transparent;
+  width: 22px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #c2cbd2;
+
+`;
+
+export const RightButton = styled.button`
+  background-color: transparent;
+  width: 22px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #c2cbd2;
+`;
+
+export const Footer = styled.footer`
+  margin-top: 36px;
+  height: 222px;
+  background-color: #edeef0;
+  border-top: 4px solid #ed1d24;
+  position: relative;
+
+  div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #e6e7e8;
+    height: 105px;
+    width: 100%;  
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      size: 14px;
+      color: #4a4a4a;
+      max-width: 668px;
+    }
+  }
+`;

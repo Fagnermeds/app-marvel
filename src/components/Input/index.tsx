@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from 'react';
 
 import { Container } from './styles';
 
-interface InputProps extends InputHTMLAttributes<HTMLElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 }
 
