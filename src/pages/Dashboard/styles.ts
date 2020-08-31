@@ -12,6 +12,11 @@ export const Header = styled.header`
   width: 100%;
   height: 95px;
   background-color: #ed1d24;
+
+  img {
+    width: 240px;
+    height: 96px;
+  }
 `;
 
 export const Main = styled.main`

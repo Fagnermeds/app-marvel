@@ -1,7 +1,12 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { 
+  useEffect, 
+  useState, 
+  useCallback, 
+} from 'react';
 
 import api from '../../services/api';
 import Input from '../../components/Input';
+import marvelLogo from '../../assets/marvel-logo.png';
 import filterImg from '../../assets/filter.svg';
 import arrowDown from '../../assets/arrow-down-copy-7.svg';
 import apiConfig from '../../config/apiConfig';
@@ -29,26 +34,30 @@ interface Heroes {
   description: string;
 }
 
+const initialPage = 1;
+
 const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [heroes, setHeroes] = useState<Heroes[]>([]);
   const [totalHeroes, setTotalHeroes] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const [heroesPerPage] = useState(12)
   const [name, setName] = useState('');
 
   const { timestamp, apiKey, hash } = apiConfig;
 
+
   useEffect(() => {
     const loadHeroes = async () => {
       setLoading(true);
       const response = 
-        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}`);
+        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&limit=100`);
       
       const { data: { results } } = response.data;
-      const { data: { total } } = response.data;
 
-      setTotalHeroes(total);
+      console.log(results);
+
+      setTotalHeroes(results.length);
       setHeroes(results);
       setLoading(false);
     }
@@ -62,6 +71,8 @@ const Dashboard: React.FC = () => {
 
     const { data: { results } } = response.data;
 
+    setCurrentPage(initialPage);
+    setTotalHeroes(results.length);
     setHeroes(results);
   }, [apiKey, hash, name, timestamp]);
 
@@ -76,6 +87,7 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <Header>
+        <img src={marvelLogo} alt="Marvel" />
       </Header>
 
       <Main>

@@ -21,6 +21,9 @@ export const LeftButton = styled.button`
   border-radius: 4px;
   border: 1px solid #c2cbd2;
 
+  &:disabled {
+    cursor: default;
+  }
 `;
 
 export const Page = styled.div`
