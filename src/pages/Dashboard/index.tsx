@@ -6,6 +6,7 @@ import filterImg from '../../assets/filter.svg';
 import arrowDown from '../../assets/arrow-down-copy-7.svg';
 import apiConfig from '../../config/apiConfig';
 import Pagination from '../../components/Pagination';
+import Loading from '../../components/Loading';
 
 import { 
   Container, 
@@ -29,7 +30,7 @@ interface Heroes {
 }
 
 const Dashboard: React.FC = () => {
-  
+  const [loading, setLoading] = useState(false);
   const [heroes, setHeroes] = useState<Heroes[]>([]);
   const [totalHeroes, setTotalHeroes] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,14 +41,16 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     const loadHeroes = async () => {
+      setLoading(true);
       const response = 
-        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&limit=15 `);
+        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}`);
       
       const { data: { results } } = response.data;
       const { data: { total } } = response.data;
 
       setTotalHeroes(total);
       setHeroes(results);
+      setLoading(false);
     }
   
     loadHeroes();
@@ -89,8 +92,10 @@ const Dashboard: React.FC = () => {
           <img src={arrowDown} alt="Arrow"/>
         </SearchForm>
 
-        <CardsContainer>
-          {currentHeroes.map(heroe => <Card key={heroe.id} heroesData={heroe} />)}
+        <CardsContainer isLoading={loading}>
+          {loading ? <Loading /> : 
+            currentHeroes.map(heroe => <Card key={heroe.id} heroesData={heroe} />)  
+          }
         </CardsContainer>
 
         <Pagination 
