@@ -11,7 +11,12 @@ interface PaginationProps {
   currentPage: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, paginate, currentPage }) => {
+const Pagination: React.FC<PaginationProps> = ({ 
+  heroesPerPage, 
+  totalHeroes, 
+  paginate, 
+  currentPage 
+}) => {  
   const totalPages = Math.ceil(totalHeroes / heroesPerPage);
   const [page, setPage] = useState(1);
 
@@ -24,8 +29,6 @@ const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, pag
       return;
     }
     
-    // setPage(page + 1);
-
     paginate(page + 1);
   }, [page, paginate, totalPages]);
 
@@ -34,8 +37,6 @@ const Pagination: React.FC<PaginationProps> = ({ heroesPerPage, totalHeroes, pag
       return;
     }
 
-    // setPage(page - 1);
-    
     paginate(page - 1);
   }, [page, paginate]);
 

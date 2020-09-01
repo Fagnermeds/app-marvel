@@ -45,4 +45,8 @@ export const RightButton = styled.button`
   height: 40px;
   border-radius: 4px;
   border: 1px solid #c2cbd2;
+
+  &:disabled {
+    cursor: default;
+  }
 `;

@@ -9,12 +9,13 @@ export default createGlobalStyle`
   }
 
   body {
+    font-family: Roboto;
     background: #f4f8fb;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 500;
+    font-weight: 400;
   }
 
   button {

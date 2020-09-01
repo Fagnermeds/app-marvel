@@ -1,7 +1,8 @@
 import React, { 
   useEffect, 
   useState, 
-  useCallback, 
+  useCallback,
+  FormEvent 
 } from 'react';
 
 import api from '../../services/api';
@@ -54,9 +55,7 @@ const Dashboard: React.FC = () => {
         await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&limit=100`);
       
       const { data: { results } } = response.data;
-
-      console.log(results);
-
+      
       setTotalHeroes(results.length);
       setHeroes(results);
       setLoading(false);
@@ -65,7 +64,9 @@ const Dashboard: React.FC = () => {
     loadHeroes();
   }, [apiKey, hash, timestamp]);
 
-  const handleSearch = useCallback(async () => {
+  const handleSearch = useCallback(async (event: FormEvent) => {
+    event.preventDefault();
+
     const response = 
       await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&nameStartsWith=${name}`);
 
@@ -93,13 +94,15 @@ const Dashboard: React.FC = () => {
       <Main>
         <Title>Character</Title>
 
-        <SearchForm>
+        <SearchForm onSubmit={handleSearch}>
           <Input 
             placeholder="Characters" 
             value={name} 
             onChange={(event) => setName(event.target.value)}  
           />
-          <img onClick={handleSearch} src={filterImg} alt="Filter"/>
+          <button type="submit">
+            <img src={filterImg} alt="Filter"/>
+          </button>
           <span>A-Z</span>
           <img src={arrowDown} alt="Arrow"/>
         </SearchForm>

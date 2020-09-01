@@ -33,30 +33,36 @@ export const Main = styled.main`
 
 export const Title = styled.h1`
   color: #ed1d24;
+  line-height: 24px;
 `;
 
-export const SearchForm = styled.div`
+export const SearchForm = styled.form`
   margin-top: 16px;
 
   display: flex;
   align-items: center;
 
-  img {
-    width: 24px;
-    height: 24px;
-    margin-left: 38px;
-    cursor: pointer;
-    transition: opacity 0.2s;
+  button {
+    border: 0;
+    background-color: transparent;
+    
+    img {
+      width: 24px;
+      height: 24px;
+      margin-left: 38px;
+      cursor: pointer;
+      transition: opacity 0.2s;
 
-    &:hover {
-      opacity: 0.5;
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 
   span {
     size: 14px;
     color: #4a4a4a;
-    margin-left: 10px;
+    margin: 0 10px;
   }
 `;
 

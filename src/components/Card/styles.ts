@@ -24,6 +24,7 @@ export const HeroName = styled.strong`
   size: 16px;
   line-height: 23px;
   color: #4a4a4a;
+  font-weight: 500; 
 `;
 
 export const ActorName = styled.span`
