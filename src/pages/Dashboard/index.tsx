@@ -44,6 +44,8 @@ const Dashboard: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [heroesPerPage] = useState(12)
   const [name, setName] = useState('');
+  const [orderBy, setOrderBy] = useState('');
+  const [changeOrder, setChangeOrder] = useState(false);
 
   const { timestamp, apiKey, hash } = apiConfig;
 
@@ -52,7 +54,7 @@ const Dashboard: React.FC = () => {
     const loadHeroes = async () => {
       setLoading(true);
       const response = 
-        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&limit=100`);
+        await api.get(`/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hash}&limit=100&orderBy=${orderBy}name`);
       
       const { data: { results } } = response.data;
       
@@ -62,7 +64,7 @@ const Dashboard: React.FC = () => {
     }
   
     loadHeroes();
-  }, [apiKey, hash, timestamp]);
+  }, [apiKey, hash, orderBy, timestamp]);
 
   const handleSearch = useCallback(async (event: FormEvent) => {
     event.preventDefault();
@@ -80,6 +82,16 @@ const Dashboard: React.FC = () => {
   const paginate = useCallback((pageNumber: number) => {
     setCurrentPage(pageNumber);
   }, []);
+
+  const toggleOrder = useCallback(() => {
+    setChangeOrder(!changeOrder);
+
+    if (orderBy.length < 1) {
+      setOrderBy('-');
+    } else {
+      setOrderBy('');
+    }
+  }, [changeOrder, orderBy]);
 
   const indexOfLastHero = currentPage * heroesPerPage;
   const indexOfFirstHero = indexOfLastHero - heroesPerPage;
@@ -103,8 +115,8 @@ const Dashboard: React.FC = () => {
           <button type="submit">
             <img src={filterImg} alt="Filter"/>
           </button>
-          <span>A-Z</span>
-          <img src={arrowDown} alt="Arrow"/>
+          <span>{ !changeOrder ? 'A-Z' : 'Z-A'}</span>
+          <img onClick={toggleOrder} src={arrowDown} alt="Arrow"/>
         </SearchForm>
 
         <CardsContainer isLoading={loading}>

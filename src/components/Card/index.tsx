@@ -24,12 +24,12 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ heroesData }) => {
   const imgUrl = `${heroesData.thumbnail.path}/standard_medium.${heroesData.thumbnail.extension}`;  
 
-  const { secondName } = changeHeroName(heroesData.name);
+  const { firstName, secondName } = changeHeroName(heroesData.name);
 
   return (
     <Container>
       <Avatar src={imgUrl} alt="Avatar" />
-      <HeroName>{heroesData.name}</HeroName>
+      <HeroName>{firstName ? firstName : heroesData.name}</HeroName>
       <ActorName>{secondName ? secondName : heroesData.name}</ActorName>
       <Description>{heroesData.description ? heroesData.description : 'No description.'}</Description>
     </Container>

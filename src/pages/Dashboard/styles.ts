@@ -64,6 +64,10 @@ export const SearchForm = styled.form`
     color: #4a4a4a;
     margin: 0 10px;
   }
+
+  > img {
+    cursor: pointer;
+  }
 `;
 
 export const CardsContainer = styled.div<CardsContainerProps>`
